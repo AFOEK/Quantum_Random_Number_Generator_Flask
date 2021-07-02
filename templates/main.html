@@ -7,6 +7,25 @@
     <title>Quantum Random Number Generator</title>
 </head>
 <body>
-    <div class="header">This is main page</div>
+    <h1>QRNG Simulator</h1>
+    <div class="main">
+        <div class="main_core">
+            <form method="POST">
+                <label class="lbl_iterarion">Iteration: </label>
+                <input type="number" name="iteration" id="iteration" min="1" max="10000">
+                <label class="lbl_shots">Shots: </label>
+                <input type="number" name="shots" id="shots" min="32" max="65536">
+                <label class="lbl_qubit">Qubit Count:</label>
+                <input type="number" name="qubit" id="qubit" min="1" max="5">
+                <label class="lbl_auto_iter">Auto Iteration: </label>
+                <input type="number" name="auto_iter" id="auto_iter" min="1" max="10000">
+                <input type="button" class="btn_generate" value="Generate !">
+                <input type="button" class="btn_clear" value="Clear !">
+                <input type="button" class="btn_export" value="Export !">
+                <input type="button" class="btn_auto_gen" value="Auto Generate !">
+                <input type="button" class="btn_auto_gen_stat" value="Auto Generate Statistics">
+            </form>
+        </div>
+    </div>
 </body>
 </html>
