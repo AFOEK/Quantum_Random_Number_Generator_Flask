@@ -1,0 +1,1 @@
+This a clone app from another previous project [here](https://github.com/AFOEK/Quantum-Random-Number-Generator-Simulator-UI),this apps using flask to build the backend.
