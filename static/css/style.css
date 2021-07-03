@@ -1,0 +1,24 @@
+body{
+    margin: 0px;
+}
+.main{
+    margin: 0px;
+}
+.main_core{
+    margin: 0px;
+}
+h1{
+    margin: 0px;
+}
+p{
+    display: table-row;
+}
+form{
+    display: table;
+}
+label{
+    display: table-cell;
+}
+input{
+    display: table-cell;
+}
