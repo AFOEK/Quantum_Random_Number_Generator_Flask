@@ -1,11 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200&family=Major+Mono+Display&family=Monofett&family=Ubuntu+Mono&display=swap');
+
 body{
     margin: 0px;
+    font-family: 'IBM Plex Mono', monospace;
 }
 .main{
     margin: 0px;
 }
 .main_core{
-    margin: 0px;
+    margin-top: 0;
+    margin-bottom: 0px;
+    margin-left: 5px;
+    margin-right: 0px;
 }
 h1{
     margin: 0px;
@@ -15,10 +21,30 @@ p{
 }
 form{
     display: table;
+    font-family: 'Ubuntu Mono', monospace;
 }
 label{
     display: table-cell;
 }
 input{
     display: table-cell;
+}
+.btn{
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    margin-left: 5px;
+    overflow: auto;
+}
+.btn_generate{
+    margin: 0px;
+}
+.radio{
+    font-family: 'Ubuntu Mono', monospace;
+}
+footer{
+    font-size: 12px;
+    margin-top: 10px;
+    padding: 5px;
+    text-align: center;
+    font-family: 'Major Mono Display', monospace;
 }

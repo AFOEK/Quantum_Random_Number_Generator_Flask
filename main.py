@@ -10,9 +10,9 @@ def main():
 def help():
     return render_template("help.html")
 
-@app.route('/feedback')
+@app.route('/stat')
 def feedback():
-    return render_template("feedback.html")
+    return render_template("stat.html")
 
 if __name__ == "__main__":
     app.debug = True
