@@ -48,3 +48,9 @@ footer{
     text-align: center;
     font-family: 'Major Mono Display', monospace;
 }
+.link{
+    color:dodgerblue;
+}
+.link ::after{
+    color: dodgerblue;
+}
