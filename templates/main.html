@@ -21,7 +21,7 @@
                 </p>
                 <p>
                     <label class="lbl_shots">Shots: </label>
-                    <input type="number" name="shots" id="shots" min="1" max="65536" step="2" value="0">
+                    <input type="number" name="shots" id="shots" min="32" max="65536" step="1" value="32">
                 </p>
                 <p>
                     <label class="lbl_qubit">Qubit Count:</label>
@@ -33,7 +33,7 @@
                 </p>
                 <p class="radio_btn">
                     <label for="radio_result">Result</label>
-                    <input type="radio" class="radio" name="radio_select" id="radio_result" value="rslt">
+                    <input type="radio" class="radio" name="radio_select" id="radio_result" value="rslt" checked>
                 </p>
                 <p class="radio_btn">
                     <label for="radio_binary">Binary form</label>
@@ -48,9 +48,9 @@
                     <input type="radio" class="radio" name="radio_select" id="radio_all" value="all">
                 </p>
                 <p>
-                    <textarea id="txt_result" class="txt_area_result" name="txt_result" rows="5" cols="50"></textarea>
+                    <textarea id="txt_result" class="txt_area_result" name="txt_result" rows="5" cols="50" disabled></textarea>
                 </p>
-                <input type="button" class="btn_generate btn" value="Generate !">
+                <input type="submit" class="btn_generate btn" value="Generate !">
                 <input type="button" class="btn_clear btn" value="Clear !">
                 <input type="button" class="btn_export btn" value="Export !">
                 <input type="button" class="btn_auto_gen btn" value="Auto Generate !">

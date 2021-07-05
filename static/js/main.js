@@ -1,11 +1,10 @@
 $(document).ready(function (){
-    $("#shots").change(function(){
-        var temp = parseInt($("#shots").val());
-        var result = temp*2-1;
-        $("#shots").attr("step", result);
-    });
-    
-    $(".btn_generate").click(function(){
-        
-    });
+    var iteration = parseInt($("#iteration").val());
+    var shots = parseInt($("#shots").val());
+    var qubit = parseInt($("#qubit").val());
+    var auto_iter = parseInt($("#auto_iter").val());
+    var result = $("#radio_result").val();
+    var binary = $("#radio_binary").val();
+    var digit = $("#radio_digit").val();
+    var all = $("#radio_all").val();
 });
