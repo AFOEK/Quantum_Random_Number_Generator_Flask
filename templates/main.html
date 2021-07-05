@@ -6,28 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static',filename='image/quantum.ico') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src=" {{ url_for('static', filename='js/main.js') }} "></script>
     <title>Quantum Random Number Generator</title>
 </head>
 <body>
     <h1>QRNG Simulator</h1>
     <div class="main">
         <div class="main_core">
-            <form method="POST">
+            <form class="main_form" method="POST">
                 <p>
                     <label class="lbl_iteration">Iteration: </label>
-                    <input type="number" name="iteration" id="iteration" min="1" max="10000">
+                    <input type="number" name="iteration" id="iteration" min="1" max="10000" value="1">
                 </p>
                 <p>
                     <label class="lbl_shots">Shots: </label>
-                    <input type="number" name="shots" id="shots" min="32" max="65536">
+                    <input type="number" name="shots" id="shots" min="1" max="65536" step="2" value="0">
                 </p>
                 <p>
                     <label class="lbl_qubit">Qubit Count:</label>
-                    <input type="number" name="qubit" id="qubit" min="1" max="5">
+                    <input type="number" name="qubit" id="qubit" min="1" max="5" value="1">
                 </p>
                 <p>
                     <label class="lbl_auto_iter">Auto Iteration: </label>
-                    <input type="number" name="auto_iter" id="auto_iter" min="1" max="10000">
+                    <input type="number" name="auto_iter" id="auto_iter" min="1" max="10000" value="1">
                 </p>
                 <p class="radio_btn">
                     <label for="radio_result">Result</label>
@@ -56,6 +58,6 @@
             </form>
         </div>
     </div>
-    <footer>&copy; Felix "AF&Ouml;&Eacute;K" MONTALFU 2021 <br/> For <a class="link" href="help">Help</a></footer>
+    <footer>&copy; Felix "AF&Ouml;&Eacute;K" MONTALFU 2021 <br/> For <a class="link" title="Help usage" href="help">Help</a></footer>
 </body>
 </html>

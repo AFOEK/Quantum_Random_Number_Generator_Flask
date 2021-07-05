@@ -51,6 +51,6 @@ footer{
 .link{
     color:dodgerblue;
 }
-.link ::after{
+.link :visited{
     color: dodgerblue;
 }
