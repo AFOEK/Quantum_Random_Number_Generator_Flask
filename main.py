@@ -34,9 +34,8 @@ def autogen():
         shot = int(request.form["shots"])
         qubit = int(request.form["qubit"])
         auto_iter = int(request.form["auto_iter"])
-        x=0
+        x=y=0
         for j in range (0,auto_iter):
-            x+=1
             circ = QuantumCircuit(qubit,qubit)
             if qubit==1:
                 for i in range(0,qubit):
@@ -73,15 +72,18 @@ def autogen():
             rslt = int(bit_string,2)
             digit = str(len(str(rslt)))
             rslt_list.append(rslt)
-            print(x)
-        for numbers in rslt_list:
-            if numbers in freq:
-                freq[numbers] += 1
-            else:
-                freq[numbers] = 1
+            x+=1
+            for numbers in rslt_list:
+                y+=1
+                if numbers in freq:
+                    freq[numbers] += 1
+                else:
+                    freq[numbers] = 1
         autogen.data_frames = pd.DataFrame(list(freq.items()), columns=['Number', 'Frequency'])
-        print(freq)
-    return "ok"
+        print(autogen.data_frames)
+        print(x)
+        print(y)
+    return "ok",200
 
 
 @app.route('/', methods=['GET', 'POST'])
