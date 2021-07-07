@@ -67,3 +67,29 @@ footer{
 .btn_auto_gen_stat{
     margin-top: 5px;
 }
+.header{
+    margin-left: 5px;
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 25px;
+}
+.error{
+    margin-left: 5px;
+    font-weight: 1000;
+}
+.rainbow{
+    background: linear-gradient(to left, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 6s ease-in-out infinite;
+    background-size: 400% 100%;
+}
+@keyframes rainbow_animation {
+    0%,100% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 100% 0;
+    }
+}

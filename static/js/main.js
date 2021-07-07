@@ -1,12 +1,6 @@
 $(document).ready(function (){
 
     $(".btn_generate").click(function(j){
-        var n = parseInt($("#iteration").val());
-        var shots = parseInt($("#shots").val());
-        var q = parseInt($("#qubit").val());
-        var auto_iter = parseInt($("#auto_iter").val());
-        var selected = $("input[name='radio_select']:checked").val();
-
         $.ajax({
             type: "POST",
             url:"/",
@@ -27,5 +21,9 @@ $(document).ready(function (){
         $("#shots").val("1024");
         $("#qubit").val("2");
         $("#auto_iter").val("100");
+    });
+
+    $(".btn_auto_gen_stat").click(function(){
+        window.open('stat','_blank')
     });
 });

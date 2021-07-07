@@ -31,6 +31,7 @@
                     <label class="lbl_auto_iter">Auto Iteration: </label>
                     <input type="number" name="auto_iter" id="auto_iter" min="1" max="10000" value="1">
                 </p>
+                <hr class="hr_radio">
                 <p class="radio_btn">
                     <label for="radio_result">Result</label>
                     <input type="radio" class="radio" name="radio_select" id="radio_result" value="rslt" checked>
@@ -46,6 +47,19 @@
                 <p class="radio_btn">
                     <label for="radio_all">All info</label>
                     <input type="radio" class="radio" name="radio_select" id="radio_all" value="all">
+                </p>
+                <hr class="radio">
+                <p>
+                    <label for="radio_bar">Bar</label>
+                    <input type="radio" class="radio" name="radio_chart" id="radio_bar" value="bar" checked>
+                </p>
+                <p>
+                    <label for="radio_heatmap">Heat map</label>
+                    <input type="radio" class="radio" name="radio_chart" id="radio_heatmap" value="heatmap">
+                </p>
+                <p>
+                    <label for="radio_scatter">Scatter Map</label>
+                    <input type="radio" class="radio" name="radio_chart" id="radio_scatter" value="scatter">
                 </p>
                 <p>
                     <textarea id="txt_result" class="txt_area_result" name="txt_result" rows="5" cols="50" readonly>{{ results }}</textarea>

@@ -1,9 +1,30 @@
 from flask import *
 from qiskit import *
-import json
+import base64
+from matplotlib.figure import Figure
+import pandas as pd
+import io
 
 app = Flask(__name__)
-
+data_frames = pd.DataFrame()
+temp_string = f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static\css\style.css">
+    <link rel="shortcut icon" href="static\image\quantum.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Statistics</title>
+</head>
+<body>
+    <div class="header">Statistics</div>
+    <div class="error rainbow">Did you already auto generate data ? It's seems empty in here</div>
+</body>
+</html>
+"""
 @app.route('/', methods=['GET', 'POST'])
 def main(results=None):
     if request.method == 'POST':
@@ -45,7 +66,6 @@ def main(results=None):
         bit_string = "".join(strings)
         rslt = int(bit_string,2)
         digit = str(len(str(rslt)))
-        print(rslt)
         if option == "rslt":
             return render_template("main.html", results=rslt)
         elif option == "bin":
@@ -61,9 +81,18 @@ def main(results=None):
 def help():
     return render_template("help.html")
 
-@app.route('/stat')
-def feedback():
-    return render_template("stat.html")
+@app.route('/stat', methods=['GET', 'POST'])
+def stat(img=None):
+    if not data_frames.empty:
+        figure = Figure(figsize=(6,6), dpi=110)
+        ax = figure.subplots()
+        output = io.BytesIO()
+        data_frames.plot(x="Number", y="Frequency", kind="bar", legend=True, ax=ax)
+        ax.set_title("Frequency distribution among generated random number")
+        figure.savefig(output, format="png")
+        data = base64.b64encode(output.getbuffer()).decode("ascii")
+        return render_template("stat.html", img=data)
+    return temp_string
 
 if __name__ == "__main__":
     app.debug = True
