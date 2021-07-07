@@ -6,7 +6,7 @@ import pandas as pd
 import io
 
 app = Flask(__name__)
-data_frames = pd.DataFrame()
+
 temp_string = f"""
 <!DOCTYPE html>
 <html lang="en">
@@ -21,17 +21,76 @@ temp_string = f"""
 </head>
 <body>
     <div class="header">Statistics</div>
-    <div class="error rainbow">Did you already auto generate data ? It's seems empty in here</div>
+    <div class="error rainbow">Did you already auto generate number ? It's seems little empty in here</div>
 </body>
+<footer>&copy; Felix "AF&Ouml;&Eacute;K" MONTALFU 2021 <br/> For <a class="link" title="Help usage" href="help">Help</a></footer>
 </html>
 """
+
+@app.route('/auto_gen', methods=['GET', 'POST'])
+def autogen():
+    if request.method == 'POST':
+        iteration = int(request.form["iteration"])
+        shot = int(request.form["shots"])
+        qubit = int(request.form["qubit"])
+        auto_iter = int(request.form["auto_iter"])
+        x=0
+        for j in range (0,auto_iter):
+            x+=1
+            circ = QuantumCircuit(qubit,qubit)
+            if qubit==1:
+                for i in range(0,qubit):
+                    circ.h(i)
+                    circ.measure(i,i)
+            elif qubit==2:
+                for i in range(0,qubit):
+                    circ.h(i)
+                    circ.measure(i,i)
+            elif qubit==3:
+                for i in range(0,qubit):
+                    circ.h(i)
+                    circ.measure(i,i)
+            elif qubit==4:
+                for i in range(0,qubit):
+                    circ.h(i)
+                    circ.measure(i,i)
+            elif qubit==5:
+                for i in range(0,qubit):
+                    circ.h(i)
+                    circ.measure(i,i)
+            number = []
+            freq={}
+            rslt_list=[]
+            for i in range(0, iteration):
+                sim = Aer.get_backend('qasm_simulator')
+                job = execute(circ, sim, shots=shot)
+                result = job.result()
+                count = result.get_counts(circ)
+                max_prob = max(count, key=count.get)
+                number.append(max_prob)
+            strings = [str(number) for number in number]
+            bit_string = "".join(strings)
+            rslt = int(bit_string,2)
+            digit = str(len(str(rslt)))
+            rslt_list.append(rslt)
+            print(x)
+        for numbers in rslt_list:
+            if numbers in freq:
+                freq[numbers] += 1
+            else:
+                freq[numbers] =1
+        autogen.data_frames = pd.DataFrame(list(freq.items()), columns=['Number', 'Frequency'])
+        print(freq)
+    return "ok"
+
+
 @app.route('/', methods=['GET', 'POST'])
 def main(results=None):
     if request.method == 'POST':
         iteration = int(request.form["iteration"])
         shot = int(request.form["shots"])
         qubit = int(request.form["qubit"])
-        auto_iter = int(request.form["auto_iter"])
+        #auto_iter = int(request.form["auto_iter"])
         option = request.form["radio_select"]
         circ = QuantumCircuit(qubit,qubit)
         if qubit==1:
@@ -83,11 +142,11 @@ def help():
 
 @app.route('/stat', methods=['GET', 'POST'])
 def stat(img=None):
-    if not data_frames.empty:
+    if not autogen.data_frames.empty:
         figure = Figure(figsize=(6,6), dpi=110)
         ax = figure.subplots()
         output = io.BytesIO()
-        data_frames.plot(x="Number", y="Frequency", kind="bar", legend=True, ax=ax)
+        autogen.data_frames.plot(x="Number", y="Frequency", kind="bar", legend=True, ax=ax)
         ax.set_title("Frequency distribution among generated random number")
         figure.savefig(output, format="png")
         data = base64.b64encode(output.getbuffer()).decode("ascii")

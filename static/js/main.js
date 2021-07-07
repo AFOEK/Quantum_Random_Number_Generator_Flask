@@ -26,4 +26,19 @@ $(document).ready(function (){
     $(".btn_auto_gen_stat").click(function(){
         window.open('stat','_blank')
     });
+
+    $(".btn_auto_gen").click(function(j){
+        $.ajax({
+            type: "POST",
+            url:"/auto_gen",
+            data: $('form').serialize(),
+            success: function(){
+                console.log("OK");
+            },
+            error: function(){
+                console.log("OK");
+            }
+        });
+        //j.preventDefault();
+    });
 });
