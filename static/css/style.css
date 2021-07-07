@@ -74,6 +74,7 @@ footer{
 }
 .error{
     margin-left: 5px;
+    font-size: 28px;
     font-weight: 1000;
 }
 .rainbow{
@@ -81,7 +82,7 @@ footer{
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: rainbow_animation 6s ease-in-out infinite;
+    animation: rainbow_animation 10s ease-in-out infinite;
     background-size: 400% 100%;
 }
 @keyframes rainbow_animation {
