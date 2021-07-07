@@ -1,27 +1,24 @@
 $(document).ready(function (){
 
     $(".btn_generate").click(function(j){
-        j.preventDefault();
         var n = parseInt($("#iteration").val());
         var shots = parseInt($("#shots").val());
         var q = parseInt($("#qubit").val());
         var auto_iter = parseInt($("#auto_iter").val());
         var selected = $("input[name='radio_select']:checked").val();
-        var datas = [
-            {"iteration": n},
-            {"shot": shots},
-            {"qubit": q},
-            {"auto_iter": auto_iter},
-            {"option": selected}
-        ];
 
         $.ajax({
             type: "POST",
             url:"/",
-            data: JSON.stringify(datas),
-            contentType: "application/json",
-            dataType: 'json'
+            data: $('form').serialize(),
+            success: function(){
+                console.log("OK");
+            },
+            error: function(){
+                console.log("OK");
+            }
         });
+        //j.preventDefault();
     });
 
     $(".btn_clear").click(function(e){
