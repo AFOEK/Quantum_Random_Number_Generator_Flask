@@ -78,7 +78,7 @@ def autogen():
             if numbers in freq:
                 freq[numbers] += 1
             else:
-                freq[numbers] =1
+                freq[numbers] = 1
         autogen.data_frames = pd.DataFrame(list(freq.items()), columns=['Number', 'Frequency'])
         print(freq)
     return "ok"
