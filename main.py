@@ -2,8 +2,10 @@ from flask import *
 from qiskit import *
 import base64
 from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
 import pandas as pd
 import io
+import seaborn as sns
 
 app = Flask(__name__)
 
@@ -34,7 +36,9 @@ def autogen():
         shot = int(request.form["shots"])
         qubit = int(request.form["qubit"])
         auto_iter = int(request.form["auto_iter"])
-        x=y=0
+        autogen.option = request.form["radio_chart"]
+        freq={}
+        rslt_list=[]
         for j in range (0,auto_iter):
             circ = QuantumCircuit(qubit,qubit)
             if qubit==1:
@@ -58,8 +62,6 @@ def autogen():
                     circ.h(i)
                     circ.measure(i,i)
             number = []
-            freq={}
-            rslt_list=[]
             for i in range(0, iteration):
                 sim = Aer.get_backend('qasm_simulator')
                 job = execute(circ, sim, shots=shot)
@@ -72,17 +74,13 @@ def autogen():
             rslt = int(bit_string,2)
             digit = str(len(str(rslt)))
             rslt_list.append(rslt)
-            x+=1
-            for numbers in rslt_list:
-                y+=1
-                if numbers in freq:
-                    freq[numbers] += 1
-                else:
-                    freq[numbers] = 1
+        for numbers in rslt_list:
+            if numbers in freq:
+                freq[numbers] += 1
+            else:
+                freq[numbers] = 1
         autogen.data_frames = pd.DataFrame(list(freq.items()), columns=['Number', 'Frequency'])
         print(autogen.data_frames)
-        print(x)
-        print(y)
     return "ok",200
 
 
@@ -92,7 +90,6 @@ def main(results=None):
         iteration = int(request.form["iteration"])
         shot = int(request.form["shots"])
         qubit = int(request.form["qubit"])
-        #auto_iter = int(request.form["auto_iter"])
         option = request.form["radio_select"]
         circ = QuantumCircuit(qubit,qubit)
         if qubit==1:
@@ -145,14 +142,31 @@ def help():
 @app.route('/stat', methods=['GET', 'POST'])
 def stat(img=None):
     if not autogen.data_frames.empty:
-        figure = Figure(figsize=(6,6), dpi=110)
-        ax = figure.subplots()
-        output = io.BytesIO()
-        autogen.data_frames.plot(x="Number", y="Frequency", kind="bar", legend=True, ax=ax)
-        ax.set_title("Frequency distribution among generated random number")
-        figure.savefig(output, format="png")
-        data = base64.b64encode(output.getbuffer()).decode("ascii")
-        return render_template("stat.html", img=data)
+        if (autogen.option == "bar"):
+            figure = Figure(figsize=(6,6), dpi=110)
+            ax = figure.subplots()
+            output = io.BytesIO()
+            autogen.data_frames.plot(x="Number", y="Frequency", kind="bar", legend=True, ax=ax)
+            ax.set_title("Frequency distribution among generated random number")
+            figure.savefig(output, format="png")
+            data = base64.b64encode(output.getbuffer()).decode("ascii")
+            return render_template("stat.html", img=data)
+        elif(autogen.option == "scatter"):
+            figure = Figure(figsize=(6,6), dpi=110)
+            ax = figure.subplots()
+            output = io.BytesIO()
+            autogen.data_frames.plot(x="Number", y="Frequency", kind="scatter", legend=True, ax=ax)
+            ax.set_title("Frequency distribution among generated random number")
+            figure.savefig(output, format="png")
+            data = base64.b64encode(output.getbuffer()).decode("ascii")
+            return render_template("stat.html", img=data)
+        elif(autogen.option == "heatmap"):
+            figure, ax = plt.subplots(figsize=(6,6), dpi=110)
+            sns.heatmap(autogen.data_frames, cmap='YlGnBu', annot=True)
+            output = io.BytesIO()
+            figure.savefig(output, format="png")
+            data = base64.b64encode(output.getbuffer()).decode("ascii")
+            return render_template("stat.html", img=data)
     return temp_string
 
 if __name__ == "__main__":

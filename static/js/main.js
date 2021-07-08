@@ -24,7 +24,7 @@ $(document).ready(function (){
     });
 
     $(".btn_auto_gen_stat").click(function(){
-        window.open('stat','_blank')
+        window.open('stat','_blank');
     });
 
     $(".btn_auto_gen").click(function(j){
