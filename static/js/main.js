@@ -24,6 +24,17 @@ $(document).ready(function (){
     });
 
     $(".btn_auto_gen_stat").click(function(){
+        $.ajax({
+            type: "POST",
+            url:"/stat",
+            data: $('form').serialize(),
+            success: function(){
+                console.log("OK");
+            },
+            error: function(){
+                console.log("OK");
+            }
+        });
         window.open('stat','_blank');
     });
 
