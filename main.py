@@ -174,7 +174,7 @@ def stat(img=None):
             figure.savefig(output, format="png")
             data = base64.b64encode(output.getbuffer()).decode("ascii")
             return render_template("stat.html", img=data)
-    return render_template("stat.html")
+    return temp_string
 
 if __name__ == "__main__":
     #app.debug = False
