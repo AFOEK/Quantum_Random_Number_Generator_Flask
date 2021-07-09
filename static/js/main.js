@@ -35,7 +35,7 @@ $(document).ready(function (){
                 console.log("OK");
             }
         });
-        //window.open('stat','_blank');
+        window.open('stat','_blank');
     });
 
     $(".btn_auto_gen").click(function(j){
