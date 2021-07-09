@@ -1,0 +1,5 @@
+flask
+qiskit[all]
+matplotlib
+seaborn
+gunicorn
