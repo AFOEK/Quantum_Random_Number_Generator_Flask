@@ -60,6 +60,7 @@ footer{
 }
 .link{
     color:dodgerblue;
+    font-weight: 800;
 }
 .link :visited{
     color: dodgerblue;
