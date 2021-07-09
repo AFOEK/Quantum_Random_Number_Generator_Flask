@@ -23,7 +23,7 @@ $(document).ready(function (){
         $("#auto_iter").val("100");
     });
 
-    $(".btn_auto_gen_stat").click(function(){
+    $(".btn_auto_gen_stat").click(function(j){
         $.ajax({
             type: "POST",
             url:"/stat",
@@ -35,7 +35,7 @@ $(document).ready(function (){
                 console.log("OK");
             }
         });
-        window.open('stat','_blank');
+        //window.open('stat','_blank');
     });
 
     $(".btn_auto_gen").click(function(j){

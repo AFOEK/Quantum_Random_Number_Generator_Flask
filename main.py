@@ -139,10 +139,17 @@ def main(results=None):
 def help():
     return render_template("help.html")
 
-@app.route('/stat', methods=['GET', 'POST'])
+@app.route('/stat', methods=['POST'])
 def stat(img=None):
-    if not autogen.data_frames.empty:
-        if (autogen.option == "bar"):
+    try:
+        data_frame = autogen.data_frames
+    except:
+        if((data_frame == "") or (data_frame.empty)):
+            return temp_string, 418
+    
+    if (request.method == 'POST'):
+        opt = request.form["radio_chart"]
+        if opt == "bar":
             figure = Figure(figsize=(6,6), dpi=110)
             ax = figure.subplots()
             output = io.BytesIO()
@@ -151,7 +158,7 @@ def stat(img=None):
             figure.savefig(output, format="png")
             data = base64.b64encode(output.getbuffer()).decode("ascii")
             return render_template("stat.html", img=data)
-        elif(autogen.option == "scatter"):
+        elif opt == "scatter":
             figure = Figure(figsize=(6,6), dpi=110)
             ax = figure.subplots()
             output = io.BytesIO()
@@ -160,14 +167,14 @@ def stat(img=None):
             figure.savefig(output, format="png")
             data = base64.b64encode(output.getbuffer()).decode("ascii")
             return render_template("stat.html", img=data)
-        elif(autogen.option == "heatmap"):
+        elif opt == "heatmap":
             figure, ax = plt.subplots(figsize=(6,6), dpi=110)
             sns.heatmap(autogen.data_frames, cmap='YlGnBu', annot=True)
             output = io.BytesIO()
             figure.savefig(output, format="png")
             data = base64.b64encode(output.getbuffer()).decode("ascii")
             return render_template("stat.html", img=data)
-    return temp_string
+    return render_template("stat.html")
 
 if __name__ == "__main__":
     app.debug = True
