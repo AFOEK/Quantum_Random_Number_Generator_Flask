@@ -178,7 +178,7 @@ def stat(img=None):
             output.seek(0)
             data = base64.b64encode(output.getbuffer()).decode("ascii")
             return render_template("stat.html", img=data)
-    return temp_string
+    return render_template("stat.html")
 
 if __name__ == "__main__":
     app.run(port=80, debug=True)

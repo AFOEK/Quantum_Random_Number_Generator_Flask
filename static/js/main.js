@@ -1,5 +1,4 @@
 $(document).ready(function (){
-
     swal({
         title: "Info",
         text: "Before start using this apps please read Help, if you already know what you doing just go ahead",
@@ -10,7 +9,7 @@ $(document).ready(function (){
         timer: 2500
     });
     
-    $(".btn_generate").click(function(j){
+    $(".btn_generate").click(function(){
         $.ajax({
             type: "POST",
             url:"/",
@@ -22,10 +21,9 @@ $(document).ready(function (){
                 console.log("OK");
             }
         });
-        //j.preventDefault();
     });
 
-    $(".btn_clear").click(function(e){
+    $(".btn_clear").click(function(){
         $("#txt_result").val("");
         $("#iteration").val("1");
         $("#shots").val("1024");
@@ -33,7 +31,7 @@ $(document).ready(function (){
         $("#auto_iter").val("100");
     });
 
-    $(".btn_auto_gen_stat").click(function(j){
+    $(".btn_auto_gen_stat").click(function(){
         $.ajax({
             type: "POST",
             url:"/stat",
@@ -48,7 +46,7 @@ $(document).ready(function (){
         window.open('stat','_blank');
     });
 
-    $(".btn_auto_gen").click(function(j){
+    $(".btn_auto_gen").click(function(){
         $.ajax({
             type: "POST",
             url:"/auto_gen",
@@ -60,6 +58,5 @@ $(document).ready(function (){
                 console.log("OK");
             }
         });
-        //j.preventDefault();
     });
 });
