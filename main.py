@@ -177,5 +177,5 @@ def stat(img=None):
     return temp_string
 
 if __name__ == "__main__":
-    #app.run(port=80, debug=True)
-    app.run()
+    app.run(port=80, debug=True)
+    #app.run()
