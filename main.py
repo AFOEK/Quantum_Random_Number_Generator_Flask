@@ -139,7 +139,7 @@ def main(results=None):
 def help():
     return render_template("help.html")
 
-@app.route('/stat', methods=['POST'])
+@app.route('/stat', methods=['GET','POST'])
 def stat(img=None):
     try:
         data_frame = autogen.data_frames
@@ -156,7 +156,7 @@ def stat(img=None):
             autogen.data_frames.plot(x="Number", y="Frequency", kind="bar", legend=True, ax=ax)
             ax.set_title("Frequency distribution among generated random number")
             figure.savefig(output, format="png")
-            data = base64.b64encode(output.getbuffer()).decode("utf8")
+            data = base64.b64encode(output.getbuffer()).decode("ascii")
             return render_template("stat.html", img=data)
         elif opt == "scatter":
             figure = Figure(figsize=(6,6), dpi=110)
@@ -165,17 +165,17 @@ def stat(img=None):
             autogen.data_frames.plot(x="Number", y="Frequency", kind="scatter", legend=True, ax=ax)
             ax.set_title("Frequency distribution among generated random number")
             figure.savefig(output, format="png")
-            data = base64.b64encode(output.getbuffer()).decode("utf8")
+            data = base64.b64encode(output.getbuffer()).decode("ascii")
             return render_template("stat.html", img=data)
         elif opt == "heatmap":
             figure, ax = plt.subplots(figsize=(6,6), dpi=110)
             sns.heatmap(autogen.data_frames, cmap='YlGnBu', annot=True)
             output = io.BytesIO()
             figure.savefig(output, format="png")
-            data = base64.b64encode(output.getbuffer()).decode("utf8")
+            data = base64.b64encode(output.getbuffer()).decode("ascii")
             return render_template("stat.html", img=data)
     return temp_string
 
 if __name__ == "__main__":
-    #app.debug = False
+    #app.run(port=80, debug=True)
     app.run()
