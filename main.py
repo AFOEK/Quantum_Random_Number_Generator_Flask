@@ -80,7 +80,6 @@ def autogen():
             else:
                 freq[numbers] = 1
         autogen.data_frames = pd.DataFrame(list(freq.items()), columns=['Number', 'Frequency'])
-        print(autogen.data_frames)
     return "ok",200
 
 
@@ -143,9 +142,11 @@ def help():
 def stat(img=None):
     try:
         data_frame = autogen.data_frames
-    except:
+    except UnboundLocalError:
         if((data_frame == "") or (data_frame.empty)):
             return temp_string, 418
+    except Exception:
+        return temp_string, 418
     
     if (request.method == 'POST'):
         opt = request.form["radio_chart"]
@@ -157,6 +158,7 @@ def stat(img=None):
             ax.set_title("Frequency distribution among generated random number")
             figure.savefig(output, format="png")
             data = base64.b64encode(output.getbuffer()).decode("ascii")
+            output.seek(0)
             return render_template("stat.html", img=data)
         elif opt == "scatter":
             figure = Figure(figsize=(6,6), dpi=110)
@@ -166,6 +168,7 @@ def stat(img=None):
             ax.set_title("Frequency distribution among generated random number")
             figure.savefig(output, format="png")
             data = base64.b64encode(output.getbuffer()).decode("ascii")
+            output.seek(0)
             return render_template("stat.html", img=data)
         elif opt == "heatmap":
             figure, ax = plt.subplots(figsize=(6,6), dpi=110)
@@ -173,6 +176,7 @@ def stat(img=None):
             output = io.BytesIO()
             figure.savefig(output, format="png")
             data = base64.b64encode(output.getbuffer()).decode("ascii")
+            output.seek(0)
             return render_template("stat.html", img=data)
     return temp_string
 
