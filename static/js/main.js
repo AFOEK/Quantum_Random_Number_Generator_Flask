@@ -1,13 +1,17 @@
 $(document).ready(function (){
-    swal({
-        title: "Info",
-        text: "Before start using this apps please read Help, if you already know what you doing just go ahead",
-        icon: "info",
-        buttons: false,
-        closeOnClickOutside: true,
-        closeOnEsc: true,
-        timer: 2500
-    });
+    if(window.location.pathname == "/"){
+        const link = document.createElement('div');
+        link.innerHTML = "Before start using this apps please read <a class='link' href='help'>Help</a>, if you already know what you doing just go ahead"
+        swal({
+            title: "Info",
+            content: link,
+            icon: "info",
+            buttons: false,
+            closeOnClickOutside: true,
+            closeOnEsc: true,
+            timer: 2500
+        });
+    }
     
     $(".btn_generate").click(function(){
         $.ajax({
