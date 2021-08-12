@@ -7,8 +7,8 @@ import pandas as pd
 import io
 import seaborn as sns
 
+__version__ = "0.1.0rc0.1"
 app = Flask(__name__)
-
 temp_string = f"""
 <!DOCTYPE html>
 <html lang="en">

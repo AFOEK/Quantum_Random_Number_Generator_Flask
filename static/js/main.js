@@ -9,7 +9,7 @@ $(document).ready(function (){
             buttons: false,
             closeOnClickOutside: true,
             closeOnEsc: true,
-            timer: 2500
+            timer: 2000
         });
     }
     
