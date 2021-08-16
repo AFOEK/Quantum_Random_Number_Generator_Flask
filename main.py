@@ -150,7 +150,9 @@ def stat(img=None):
         return temp_string, 418
     
     img_path = os.path.join("static", "image", "plot.png")
-
+    if os.path.exists(img_path):
+        os.remove(img_path)
+    
     if (request.method == 'POST'):
         opt = request.form["radio_chart"]
         if opt == "bar":
