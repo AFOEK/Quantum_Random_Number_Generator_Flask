@@ -153,20 +153,23 @@ def stat(img=None):
         if opt == "bar":
             figure = Figure(figsize=(6,6), dpi=110)
             ax = figure.subplots()
+            output = io.BytesIO()
             autogen.data_frames.plot(x="Number", y="Frequency", kind="bar", legend=True, ax=ax)
             ax.set_title("Frequency distribution among generated random number")
-            figure.savefig('static\\image\\plot.png')
+            figure.savefig('static/image/plot.png')
         elif opt == "scatter":
             figure = Figure(figsize=(6,6), dpi=110)
             ax = figure.subplots()
+            output = io.BytesIO()
             autogen.data_frames.plot(x="Number", y="Frequency", kind="scatter", legend=True, ax=ax)
             ax.set_title("Frequency distribution among generated random number")
-            figure.savefig('static\\image\\plot.png')
+            figure.savefig('static/image/plot.png')
         elif opt == "heatmap":
             figure, ax = plt.subplots(figsize=(6,6), dpi=110)
             sns.heatmap(autogen.data_frames, cmap='YlGnBu', annot=True)
-            figure.savefig('static\\image\\plot.png')
-    return render_template("stat.html", img='static\\image\\plot.png')
+            output = io.BytesIO()
+            figure.savefig('static/image/plot.png')
+    return render_template("stat.html", img='static/image/plot.png')
 
 if __name__ == "__main__":
     app.run(port=80, debug=True)
