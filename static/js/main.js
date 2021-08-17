@@ -29,10 +29,20 @@ $(document).ready(function (){
 
     $(".btn_clear").click(function(){
         $("#txt_result").val("");
-        $("#iteration").val("1");
+        $("#iteration").val("10");
         $("#shots").val("1024");
         $("#qubit").val("2");
         $("#auto_iter").val("100");
+        $("#radio_all").prop("checked", true).trigger("click");
+        $("#radio_bar").prop("checked", true).trigger("click");
+        swal({
+            title: "Clear",
+            icon: "info",
+            buttons: false,
+            closeOnClickOutside: true,
+            closeOnEsc: true,
+            timer: 1000
+        });
     });
 
     $(".btn_auto_gen_stat").click(function(){

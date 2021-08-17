@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import io
 import seaborn as sns
+from os import path
 
 __version__ = "0.1.0rc0.1"
 app = Flask(__name__)
@@ -148,6 +149,10 @@ def stat(img=None):
     except Exception:
         return temp_string, 418
     
+    img_path = os.path.join("static", "image", "plot.png")
+    if os.path.exists(img_path):
+        os.remove(img_path)
+    
     if (request.method == 'POST'):
         opt = request.form["radio_chart"]
         if opt == "bar":
@@ -156,20 +161,19 @@ def stat(img=None):
             output = io.BytesIO()
             autogen.data_frames.plot(x="Number", y="Frequency", kind="bar", legend=True, ax=ax)
             ax.set_title("Frequency distribution among generated random number")
-            figure.savefig('static/image/plot.png')
+            figure.savefig(img_path)
         elif opt == "scatter":
             figure = Figure(figsize=(6,6), dpi=110)
             ax = figure.subplots()
             output = io.BytesIO()
             autogen.data_frames.plot(x="Number", y="Frequency", kind="scatter", legend=True, ax=ax)
             ax.set_title("Frequency distribution among generated random number")
-            figure.savefig('static/image/plot.png')
+            figure.savefig(img_path)
         elif opt == "heatmap":
             figure, ax = plt.subplots(figsize=(6,6), dpi=110)
             sns.heatmap(autogen.data_frames, cmap='YlGnBu', annot=True)
-            output = io.BytesIO()
-            figure.savefig('static/image/plot.png')
-    return render_template("stat.html", img='static/image/plot.png')
+            figure.savefig(img_path)
+    return render_template("stat.html", img=img_path)
 
 if __name__ == "__main__":
     app.run(port=80, debug=True)
