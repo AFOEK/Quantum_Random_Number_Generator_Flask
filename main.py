@@ -149,9 +149,13 @@ def stat(img=None):
     except Exception:
         return temp_string, 418
     
+    img_path = os.path.join("static", "image", "plot.png")
+    
     if (request.method == 'POST'):
         opt = request.form["radio_chart"]
         if opt == "bar":
+            if os.path.exists(img_path):
+                os.remove(img_path)
             figure = Figure(figsize=(6,6), dpi=110)
             ax = figure.subplots()
             output = io.BytesIO()
@@ -159,6 +163,8 @@ def stat(img=None):
             ax.set_title("Frequency distribution among generated random number")
             figure.savefig(img_path)
         elif opt == "scatter":
+            if os.path.exists(img_path):
+                os.remove(img_path)
             figure = Figure(figsize=(6,6), dpi=110)
             ax = figure.subplots()
             output = io.BytesIO()
@@ -166,6 +172,8 @@ def stat(img=None):
             ax.set_title("Frequency distribution among generated random number")
             figure.savefig(img_path)
         elif opt == "heatmap":
+            if os.path.exists(img_path):
+                os.remove(img_path)
             figure, ax = plt.subplots(figsize=(6,6), dpi=110)
             sns.heatmap(autogen.data_frames, cmap='YlGnBu', annot=True)
             figure.savefig(img_path)
