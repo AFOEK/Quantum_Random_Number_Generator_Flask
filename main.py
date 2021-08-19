@@ -143,7 +143,7 @@ def help():
     return render_template("help.html")
 
 @app.route('/stat', methods=['GET','POST'])
-def stat(img=None):
+def stat(img):
     global img_path
     try:
         data_frame = autogen.data_frames
@@ -177,4 +177,4 @@ def stat(img=None):
 
 if __name__ == "__main__":
     app.run(port=80, debug=True)
-    #app.run()
+    #app.run()"Succesfully to generate data"
