@@ -1,6 +1,5 @@
 from flask import *
 from qiskit import *
-import base64
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -9,6 +8,7 @@ import seaborn as sns
 from os import path
 
 __version__ = "0.1.0rc0.1"
+img_path = os.path.join("static", "image", "plot.png")
 app = Flask(__name__)
 temp_string = f"""
 <!DOCTYPE html>
@@ -32,7 +32,10 @@ temp_string = f"""
 
 @app.route('/auto_gen', methods=['GET', 'POST'])
 def autogen():
+    global img_path
     if request.method == 'POST':
+        if os.path.exists(img_path):
+            os.remove(img_path)
         iteration = int(request.form["iteration"])
         shot = int(request.form["shots"])
         qubit = int(request.form["qubit"])
@@ -141,6 +144,7 @@ def help():
 
 @app.route('/stat', methods=['GET','POST'])
 def stat(img=None):
+    global img_path
     try:
         data_frame = autogen.data_frames
     except UnboundLocalError:
@@ -149,13 +153,9 @@ def stat(img=None):
     except Exception:
         return temp_string, 418
     
-    img_path = os.path.join("static", "image", "plot.png")
-    
     if (request.method == 'POST'):
         opt = request.form["radio_chart"]
         if opt == "bar":
-            if os.path.exists(img_path):
-                os.remove(img_path)
             figure = Figure(figsize=(6,6), dpi=110)
             ax = figure.subplots()
             output = io.BytesIO()
@@ -163,8 +163,6 @@ def stat(img=None):
             ax.set_title("Frequency distribution among generated random number")
             figure.savefig(img_path)
         elif opt == "scatter":
-            if os.path.exists(img_path):
-                os.remove(img_path)
             figure = Figure(figsize=(6,6), dpi=110)
             ax = figure.subplots()
             output = io.BytesIO()
@@ -172,8 +170,6 @@ def stat(img=None):
             ax.set_title("Frequency distribution among generated random number")
             figure.savefig(img_path)
         elif opt == "heatmap":
-            if os.path.exists(img_path):
-                os.remove(img_path)
             figure, ax = plt.subplots(figsize=(6,6), dpi=110)
             sns.heatmap(autogen.data_frames, cmap='YlGnBu', annot=True)
             figure.savefig(img_path)

@@ -29,7 +29,7 @@ $(document).ready(function (){
 
     $(".btn_clear").click(function(){
         $("#txt_result").val("");
-        $("#iteration").val("10");
+        $("#iteration").val("5");
         $("#shots").val("1024");
         $("#qubit").val("2");
         $("#auto_iter").val("100");
@@ -61,12 +61,23 @@ $(document).ready(function (){
     });
 
     $(".btn_auto_gen").click(function(){
+        const contents = document.createElement('div');
+        contents.innerHTML = "Succesfully to generate date"
         $.ajax({
             type: "POST",
             url:"/auto_gen",
             data: $('form').serialize(),
             success: function(){
                 console.log("OK");
+                swal({
+                    title: "Success",
+                    content: contents,
+                    icon: "info",
+                    buttons: false,
+                    closeOnClickOutside: true,
+                    closeOnEsc: true,
+                    timer: 1500
+                });
             },
             error: function(){
                 console.log("OK");
