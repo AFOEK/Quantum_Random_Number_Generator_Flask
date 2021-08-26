@@ -147,7 +147,7 @@ def stat(img=None):
             return temp_string, 418
     except Exception:
         return temp_string, 418
-
+    img_path = ""
     img_path_bar = os.path.join("static", "image", "plot_bar.png")
     img_path_scatter = os.path.join("static", "image", "plot_scatter.png")
     img_path_heatmap = os.path.join("static", "image", "plot_heatmap.png")
@@ -172,6 +172,14 @@ def stat(img=None):
             figure, ax = plt.subplots(figsize=(6,6), dpi=110)
             sns.heatmap(autogen.data_frames, cmap='YlGnBu', annot=True)
             figure.savefig(img_path_heatmap)
+            
+    if(path.isfile(img_path_bar)):
+        img_path = img_path_bar
+    elif(path.isfile(img_path_heatmap)):
+        img_path = img_path_heatmap
+    elif(path.isfile(img_path_scatter)):
+        img_path = img_path_scatter
+
     return render_template("stat.html", img=img_path)
 
 if __name__ == "__main__":

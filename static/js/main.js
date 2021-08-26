@@ -1,4 +1,13 @@
-$(document).ready(function (){
+$(document).ready(function(){
+    $(document).on('load', function(){
+        jQuery.Event.prototype.preventDefault = (function(){
+            var origin = jQuery.Event.prototype.preventDefaultl
+            return function(){
+                if($(this.target).hasClass('txt_area_result')) {return;}
+                origin.call(this)
+            }
+        }())
+    });
     if(window.location.pathname == "/"){
         const link = document.createElement('div');
         link.innerHTML = "Before start using this apps please read <a class='link' href='help'>Help</a>, if you already know what you doing just go ahead"
@@ -13,7 +22,7 @@ $(document).ready(function (){
         });
     }
     
-    $(".btn_generate").click(function(){
+    $(".btn_generate").click(function(e){
         $.ajax({
             type: "POST",
             url:"/",
@@ -25,6 +34,7 @@ $(document).ready(function (){
                 console.log("OK");
             }
         });
+        e.preventDefault();
     });
 
     $(".btn_clear").click(function(){
@@ -45,7 +55,7 @@ $(document).ready(function (){
         });
     });
 
-    $(".btn_auto_gen_stat").click(function(){
+    $(".btn_auto_gen_stat").click(function(e){
         $.ajax({
             type: "POST",
             url:"/stat",
@@ -58,11 +68,12 @@ $(document).ready(function (){
             }
         });
         window.open('stat','_blank');
+        e.preventDefault();
     });
 
-    $(".btn_auto_gen").click(function(){
+    $(".btn_auto_gen").click(function(e){
         const contents = document.createElement('div');
-        contents.innerHTML = "Succesfully to generate date"
+        contents.innerHTML = "Succesfully to generate data"
         $.ajax({
             type: "POST",
             url:"/auto_gen",
@@ -80,7 +91,7 @@ $(document).ready(function (){
                 });
             },
             error: function(){
-                console.log("OK");
+                console.log("NOT OK!");
             }
         });
     });
