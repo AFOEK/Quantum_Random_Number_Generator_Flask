@@ -55,7 +55,7 @@ $(document).ready(function(){
         });
     });
 
-    $(".btn_auto_gen_stat").click(function(e){
+    $(".btn_auto_gen_stat").click(function(){
         $.ajax({
             type: "POST",
             url:"/stat",
@@ -68,10 +68,9 @@ $(document).ready(function(){
             }
         });
         window.open('stat','_blank');
-        e.preventDefault();
     });
 
-    $(".btn_auto_gen").click(function(e){
+    $(".btn_auto_gen").click(function(){
         const contents = document.createElement('div');
         contents.innerHTML = "Succesfully to generate data"
         $.ajax({
