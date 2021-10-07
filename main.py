@@ -123,14 +123,20 @@ def main(results=None):
         bit_string = "".join(strings)
         rslt = int(bit_string,2)
         digit = str(len(str(rslt)))
+        hex_digit = hex(rslt)
+        oct_digit = oct(rslt) 
         if option == "rslt":
             return render_template("main.html", results=rslt)
         elif option == "bin":
             return render_template("main.html", results=bit_string)
         elif option == "digit":
             return render_template("main.html", results=digit)
+        elif option == "hex":
+            return render_template("main.html", results=hex_digit)
+        elif option == "oct":
+            return render_template("main.html", results=oct_digit)
         elif option == "all":
-            final = digit + "\n" + str(rslt) + "\n" + bit_string
+            final = digit + "\n" + str(rslt) + "\n" + bit_string + "\n" + hex_digit + "\n" + oct_digit
             return render_template("main.html", results=final)
     return render_template("main.html")
 

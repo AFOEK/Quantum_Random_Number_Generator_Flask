@@ -46,6 +46,14 @@
                     <input type="radio" class="radio" name="radio_select" id="radio_digit" value="digit">
                 </p>
                 <p class="radio_btn">
+                    <label for="radio_hex">Hexadecimal</label>
+                    <input type="radio" class="radio" name="radio_select" id="radio_hex" value="hex">
+                </p>
+                <p class="radio_btn">
+                    <label for="radio_oct">Octadecimal</label>
+                    <input type="radio" class="radio" name="radio_select" id="radio_oct" value="oct">
+                </p>
+                <p class="radio_btn">
                     <label for="radio_all">All info</label>
                     <input type="radio" class="radio" name="radio_select" id="radio_all" value="all">
                 </p>
@@ -64,6 +72,7 @@
                 </p>
                 <p>
                     <textarea id="txt_result" class="txt_area_result" name="txt_result" rows="5" cols="50" readonly>{{ results }}</textarea>
+                    <!-- <label id="txt_result" class="txt_area_result" name="txt_result">{{ results }}</label> -->
                 </p>
                 <input type="submit" class="btn_generate btn" value="Generate !">
                 <input type="button" class="btn_clear btn" value="Clear !">

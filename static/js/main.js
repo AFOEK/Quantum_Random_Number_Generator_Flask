@@ -23,9 +23,12 @@ $(document).ready(function(){
     }
     
     $(".btn_generate").click(function(e){
+        // e.preventDefault()
         $.ajax({
             type: "POST",
             url:"/",
+            async: false,
+            timeout: 70000,
             data: $('form').serialize(),
             success: function(){
                 console.log("OK");
@@ -34,7 +37,6 @@ $(document).ready(function(){
                 console.log("OK");
             }
         });
-        e.preventDefault();
     });
 
     $(".btn_clear").click(function(){
@@ -59,6 +61,8 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",
             url:"/stat",
+            async: false,
+            timeout: 70000,
             data: $('form').serialize(),
             success: function(){
                 console.log("OK");
@@ -76,6 +80,8 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",
             url:"/auto_gen",
+            async: false,
+            timeout: 70000,
             data: $('form').serialize(),
             success: function(){
                 console.log("OK");
