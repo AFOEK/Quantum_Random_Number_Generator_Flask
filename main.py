@@ -6,8 +6,10 @@ import pandas as pd
 import io
 import seaborn as sns
 from os import path
+import matplotlib
 
 __version__ = "0.1.0rc0.1"
+matplotlib.use('Agg')
 app = Flask(__name__)
 temp_string = f"""
 <!DOCTYPE html>
@@ -153,7 +155,17 @@ def stat(img=None):
             return temp_string, 418
     except Exception:
         return temp_string, 418
+    
     img_path = ""
+    try:
+        os.remove("static/image/plot_bar.png")
+        os.remove("static/image/plot_heatmap.png")
+        os.remove("static/image/plot_scatter.png")
+        os.remove("static/image/plot.png")
+    except:
+        print("File already cleared")
+        pass
+    
     img_path_bar = os.path.join("static", "image", "plot_bar.png")
     img_path_scatter = os.path.join("static", "image", "plot_scatter.png")
     img_path_heatmap = os.path.join("static", "image", "plot_heatmap.png")
@@ -178,13 +190,17 @@ def stat(img=None):
             figure, ax = plt.subplots(figsize=(6,6), dpi=110)
             sns.heatmap(autogen.data_frames, cmap='YlGnBu', annot=True)
             figure.savefig(img_path_heatmap)
-            
-    if(path.isfile(img_path_bar)):
-        img_path = img_path_bar
-    elif(path.isfile(img_path_heatmap)):
-        img_path = img_path_heatmap
-    elif(path.isfile(img_path_scatter)):
-        img_path = img_path_scatter
+
+    while((path.isfile("static/image/plot_bar.png")) or (path.isfile("static/image/plot_heatmap.png")) or (path.isfile("static/image/plot_scatter.png")) or (path.isfile("static/image/plot.png"))):        
+        if(path.isfile(img_path_bar)):
+            img_path = img_path_bar
+            break
+        elif(path.isfile(img_path_heatmap)):
+            img_path = img_path_heatmap
+            break
+        elif(path.isfile(img_path_scatter)):
+            img_path = img_path_scatter
+            break
 
     return render_template("stat.html", img=img_path)
 
