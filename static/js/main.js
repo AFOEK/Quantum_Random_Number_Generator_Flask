@@ -1,14 +1,12 @@
-$(document).ready(function(){
-    // $(document).on('load', function(){
-    //     jQuery.Event.prototype.preventDefault = (function(){
-    //         var origin = jQuery.Event.prototype.preventDefault
-    //         return function(){
-    //             if($(this.target).hasClass('txt_area_result')) {return;}
-    //             origin.call(this)
-    //         }
-    //     }())
-    // });
-    if(window.location.pathname == "/"){
+$(document).ready(function () {
+    // jQuery.Event.prototype.preventDefault = (function () {
+    //     var origin = jQuery.Event.prototype.preventDefault;
+    //     return function () {
+    //         if ($(this.target).hasClass('txt_area_result')) { return; }
+    //         origin.call(this)
+    //     }
+    // }())
+    if (window.location.pathname == "/") {
         const link = document.createElement('div');
         link.innerHTML = "Before start using this apps please read <a class='link' href='help'>Help</a>, if you already know what you doing just go ahead"
         swal({
@@ -21,25 +19,32 @@ $(document).ready(function(){
             timer: 2000
         });
     }
-    
-    $(".btn_generate").click(function(e){
+
+    $(".btn_generate").click(function (e) {
         e.preventDefault()
+        jQuery.Event.prototype.preventDefault = (function () {
+            var origin = jQuery.Event.prototype.preventDefault;
+            return function () {
+                if ($(this.target).hasClass('txt_area_result')) { return; }
+                origin.call(this)
+            }
+        }())
         $.ajax({
             type: "POST",
-            url:"/",
+            url: "/",
             async: true,
             timeout: 70000,
             data: $('form').serialize(),
-            success: function(){
+            success: function () {
                 console.log("OK");
             },
-            error: function(){
+            error: function () {
                 console.log("NOT OK! [err_btn_generate]");
             }
         });
     });
 
-    $(".btn_clear").click(function(){
+    $(".btn_clear").click(function () {
         $("#txt_result").val("");
         $("#iteration").val("5");
         $("#shots").val("1024");
@@ -57,33 +62,33 @@ $(document).ready(function(){
         });
     });
 
-    $(".btn_auto_gen_stat").click(function(){
+    $(".btn_auto_gen_stat").click(function () {
         $.ajax({
             type: "POST",
-            url:"/stat",
+            url: "/stat",
             async: true,
             timeout: 70000,
             data: $('form').serialize(),
-            success: function(){
+            success: function () {
                 console.log("OK");
             },
-            error: function(){
+            error: function () {
                 console.log("NOT OK! [err_btn_auto_gen_stat]");
             }
         });
-        window.open('stat','_blank');
+        window.open('stat', '_blank');
     });
 
-    $(".btn_auto_gen").click(function(){
+    $(".btn_auto_gen").click(function () {
         const contents = document.createElement('div');
         contents.innerHTML = "Succesfully to generate data"
         $.ajax({
             type: "POST",
-            url:"/auto_gen",
+            url: "/auto_gen",
             async: true,
             timeout: 70000,
             data: $('form').serialize(),
-            success: function(){
+            success: function () {
                 console.log("OK");
                 swal({
                     title: "Success",
@@ -95,7 +100,7 @@ $(document).ready(function(){
                     timer: 1500
                 });
             },
-            error: function(){
+            error: function () {
                 console.log("NOT OK! [err_btn_auto_gen]");
             }
         });
