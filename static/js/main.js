@@ -23,18 +23,18 @@ $(document).ready(function(){
     }
     
     $(".btn_generate").click(function(e){
-        // e.preventDefault()
+        e.preventDefault()
         $.ajax({
             type: "POST",
             url:"/",
-            async: false,
+            async: true,
             timeout: 70000,
             data: $('form').serialize(),
             success: function(){
                 console.log("OK");
             },
             error: function(){
-                console.log("OK");
+                console.log("NOT OK! [err_btn_generate]");
             }
         });
     });
@@ -61,14 +61,14 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",
             url:"/stat",
-            async: false,
+            async: true,
             timeout: 70000,
             data: $('form').serialize(),
             success: function(){
                 console.log("OK");
             },
             error: function(){
-                console.log("OK");
+                console.log("NOT OK! [err_btn_auto_gen_stat]");
             }
         });
         window.open('stat','_blank');
@@ -80,7 +80,7 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",
             url:"/auto_gen",
-            async: false,
+            async: true,
             timeout: 70000,
             data: $('form').serialize(),
             success: function(){
@@ -96,7 +96,7 @@ $(document).ready(function(){
                 });
             },
             error: function(){
-                console.log("NOT OK!");
+                console.log("NOT OK! [err_btn_auto_gen]");
             }
         });
     });
