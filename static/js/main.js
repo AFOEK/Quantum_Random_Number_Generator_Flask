@@ -1,13 +1,13 @@
 $(document).ready(function(){
-    $(document).on('load', function(){
-        jQuery.Event.prototype.preventDefault = (function(){
-            var origin = jQuery.Event.prototype.preventDefaultl
-            return function(){
-                if($(this.target).hasClass('txt_area_result')) {return;}
-                origin.call(this)
-            }
-        }())
-    });
+    // $(document).on('load', function(){
+    //     jQuery.Event.prototype.preventDefault = (function(){
+    //         var origin = jQuery.Event.prototype.preventDefault
+    //         return function(){
+    //             if($(this.target).hasClass('txt_area_result')) {return;}
+    //             origin.call(this)
+    //         }
+    //     }())
+    // });
     if(window.location.pathname == "/"){
         const link = document.createElement('div');
         link.innerHTML = "Before start using this apps please read <a class='link' href='help'>Help</a>, if you already know what you doing just go ahead"
