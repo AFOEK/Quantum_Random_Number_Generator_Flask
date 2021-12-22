@@ -21,14 +21,14 @@ $(document).ready(function () {
     }
 
     $(".btn_generate").click(function (e) {
-        e.preventDefault()
-        jQuery.Event.prototype.preventDefault = (function () {
-            var origin = jQuery.Event.prototype.preventDefault;
-            return function () {
-                if ($(this.target).hasClass('txt_area_result')) { return; }
-                origin.call(this)
-            }
-        }())
+        // e.preventDefault()
+        // jQuery.Event.prototype.preventDefault = (function () {
+        //     var origin = jQuery.Event.prototype.preventDefault;
+        //     return function () {
+        //         if ($(this.target).hasClass('txt_area_result')) { return; }
+        //         origin.call(this)
+        //     }
+        // }())
         $.ajax({
             type: "POST",
             url: "/",
