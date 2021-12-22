@@ -8,7 +8,7 @@ import seaborn as sns
 from os import path
 import matplotlib
 
-__version__ = "0.1.0rc0.1"
+__version__ = "0.1.0rc0.9"
 matplotlib.use('Agg')
 app = Flask(__name__)
 temp_string = f"""
