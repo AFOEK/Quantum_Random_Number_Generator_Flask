@@ -6,7 +6,9 @@ import pandas as pd
 import io
 import seaborn as sns
 from os import path
+import time
 import matplotlib
+import glob
 
 __version__ = "0.1.0rc0.9"
 matplotlib.use('Agg')
@@ -190,8 +192,9 @@ def stat(img=None):
             figure, ax = plt.subplots(figsize=(6,6), dpi=110)
             sns.heatmap(autogen.data_frames, cmap='YlGnBu', annot=True)
             figure.savefig(img_path_heatmap)
-
-    while((path.isfile("static/image/plot_bar.png")) or (path.isfile("static/image/plot_heatmap.png")) or (path.isfile("static/image/plot_scatter.png")) or (path.isfile("static/image/plot.png"))):        
+    timeout = 10
+    attempt = 0
+    while(glob.glob("static/image/*.png") or (attempt < timeout)):        
         if(path.isfile(img_path_bar)):
             img_path = img_path_bar
             break
@@ -201,7 +204,8 @@ def stat(img=None):
         elif(path.isfile(img_path_scatter)):
             img_path = img_path_scatter
             break
-
+        time.sleep(1)
+        attempt += 1
     return render_template("stat.html", img=img_path)
 
 if __name__ == "__main__":

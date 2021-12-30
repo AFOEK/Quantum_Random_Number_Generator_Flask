@@ -26,9 +26,10 @@ $(document).ready(function () {
         //     var origin = jQuery.Event.prototype.preventDefault;
         //     return function () {
         //         if ($(this.target).hasClass('txt_area_result')) { return; }
-        //         origin.call(this)
+        //         origin.call(this);
         //     }
-        // }())
+        // }());
+
         $.ajax({
             type: "POST",
             url: "/",
